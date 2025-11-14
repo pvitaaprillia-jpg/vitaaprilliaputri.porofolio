@@ -1,0 +1,121 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  min-height: 100vh;
+  background-color: #8b9cb4;
+  color: #333;
+  overflow-x: hidden;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 230px;
+  background-color: #51778b;
+  color: #fff;
+  padding: 30px 20px;
+  position: fixed;
+  height: 100%;
+  left: 0;
+  top: 0;
+  transform: translateX(-250px);
+  opacity: 0;
+  animation: slideIn 0.8s ease forwards;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes slideIn {
+  0% { transform: translateX(-250px); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+.sidebar h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #c4c7d8;
+}
+
+.sidebar ul li {
+  margin: 15px 0;
+}
+
+/* LINK */
+.sidebar ul li a {
+  color: #ddd;
+  text-decoration: none;
+  padding: 10px 15px;
+  display: block;
+  border-radius: 10px;
+  transition: 0.3s ease;
+  position: relative;
+}
+
+.sidebar ul li a:hover {
+  color: #00adb5;
+  transform: translateX(8px);
+}
+
+.sidebar ul li a.active {
+  background-color: #00adb5;
+  color: #fff;
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #00adb5;
+}
+
+/* MAIN CONTENT */
+.main-content {
+  margin-left: 250px;
+  padding: 40px;
+}
+
+section {
+  margin-bottom: 60px;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: 0.8s ease;
+}
+
+section.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  border-left: 5px solid #00adb5;
+  padding-left: 10px;
+}
+
+/* CARD */
+.card {
+  background-color: #fff;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+/* SKILLS */
+.skill {
+  margin-bottom: 20px;
+}
+
+.skill-bar {
+  height: 10px;
+  background-color: #e0e0e0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.skill-progress {
+  height: 10px;
+  background-color: #00adb5;
+  width: 0%;
+  transition: width 1.5s ease;
+}
