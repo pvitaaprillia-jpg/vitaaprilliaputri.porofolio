@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio | Vita Aprillia Putri</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      display: flex;
+      min-height: 100vh;
+      background-color: #8b9cb4;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    /* ===== SIDEBAR ===== */
+    .sidebar {
+      width: 230px;
+      background-color: #51778b;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 30px 20px;
+      position: fixed;
+      height: 100%;
+      left: 0;
+      top: 0;
+      transform: translateX(-250px);
+      opacity: 0;
+      animation: slideIn 0.8s ease forwards;
+      box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
+    }
+
+    @keyframes slideIn {
+      0% { transform: translateX(-250px); opacity: 0; }
+      100% { transform: translateX(0); opacity: 1; }
+    }
+
+    .sidebar h2 {
+      text-align: center;
+      font-size: 1.4rem;
+      margin-bottom: 30px;
+      color: #c4c7d8;
+    }
+
+    .sidebar ul {
+      list-style: none;
+    }
+
+    .sidebar ul li {
+      margin: 15px 0;
+      opacity: 0;
+      transform: translateX(-20px);
+      animation: fadeInLinks 0.6s ease forwards;
+    }
+
+    .sidebar ul li:nth-child(1) { animation-delay: 0.4s; }
+    .sidebar ul li:nth-child(2) { animation-delay: 0.5s; }
+    .sidebar ul li:nth-child(3) { animation-delay: 0.6s; }
+    .sidebar ul li:nth-child(4) { animation-delay: 0.7s; }
+    .sidebar ul li:nth-child(5) { animation-delay: 0.8s; }
+
+    @keyframes fadeInLinks {
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    /* ===== LINK STYLE DENGAN EFEK ===== */
+    .sidebar ul li a {
+      color: #ddd;
+      text-decoration: none;
+      font-size: 1rem;
+      display: block;
+      padding: 10px 15px;
+      border-radius: 10px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    /* efek garis bawah bercahaya */
+    .sidebar ul li a::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%) scaleX(0);
+      width: 80%;
+      height: 2px;
+      background: #00adb5;
+      transition: transform 0.3s ease;
+      box-shadow: 0 0 8px #00adb5;
+    }
+
+    .sidebar ul li a:hover::after {
+      transform: translateX(-50%) scaleX(1);
+    }
+
+    .sidebar ul li a:hover {
+      color: #00adb5;
+      transform: translateX(8px);
+    }
+
+    .sidebar ul li a.active {
+      background-color: #00adb5;
+      color: #fff;
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #00adb5;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #aaa;
+      opacity: 0;
+      animation: fadeInFooter 1s ease forwards;
+      animation-delay: 1s;
+    }
+
+    @keyframes fadeInFooter {
+      to { opacity: 1; }
+    }
+
+    /* ===== MAIN CONTENT ===== */
+    .main-content {
+      margin-left: 250px;
+      padding: 40px;
+      flex: 1;
+      scroll-behavior: smooth;
+    }
+
+    section {
+      margin-bottom: 60px;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.8s ease;
+    }
+
+    section.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    section h1 {
+      font-size: 2rem;
+      color: #222;
+      margin-bottom: 20px;
+      border-left: 5px solid #00adb5;
+      padding-left: 10px;
+    }
+
+    section p {
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background-color: #fff;
+      border-radius: 15px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      padding: 25px;
+      margin-bottom: 25px;
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    /* ===== SKILLS ===== */
+    .skill {
+      margin-bottom: 20px;
+    }
+
+    .skill-name {
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .skill-bar {
+      height: 10px;
+      width: 100%;
+      background-color: #e0e0e0;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .skill-progress {
+      height: 10px;
+      background-color: #00adb5;
+      border-radius: 10px;
+      width: 0%;
+      transition: width 1.5s ease;
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        align-items: center;
+        animation: none;
+        transform: none;
+        opacity: 1;
+      }
+
+      .sidebar ul {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+      }
+
+      .main-content {
+        margin-left: 0;
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ===== SIDEBAR ===== -->
+  <div class="sidebar">
+    <div>
+      <h2>Vita Aprillia putri</h2>
+      <ul>
+        <li><a href="#home" class="active">Home</a></li>
+        <li><a href="#about">About Me</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#certificate">Certificates</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer">
+      <p>© 2025 Vita Aprillia Putri</p>
+    </div>
+  </div>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <div class="main-content">
+    <section id="home">
+      <h1>Home</h1>
+      <div class="card">
+        <p><strong>Vita Aprillia Putri</strong>, saya seorang siswi jurusan Teknik Komputer dan Jaringan (TKJ) yang tertarik dengan dunia teknologi, desain web, dan jaringan komputer.</p>
+      </div>
+    </section>
+
+    <section id="about">
+      <h1>About Me</h1>
+      <div class="card">
+        <p>Perkenalkan, nama saya Vita Aprillia Putri, bisa dipanggil Vita. Saya berasal dari SMKN1 Nglegok dan sekarang saya menjadi siswa di jurusan Teknik Komputer dan Jaringan (TKJ). Saya memiliki ketertarikan besar di dunia IT, jaringan komputer, dan teknologi digital.</p>
+      </div>
+    </section>
+
+    <section id="skills">
+      <h1>Skills</h1>
+      <div class="card">
+        <div class="skill">
+          <div class="skill-name">Instal Debian</div>
+          <div class="skill-bar"><div class="skill-progress" data-width="90%"></div></div>
+        </div>
+        <div class="skill">
+          <div class="skill-name">Instal Windows</div>
+          <div class="skill-bar"><div class="skill-progress" data-width="80%"></div></div>
+        </div>
+        <div class="skill">
+          <div class="skill-name">Membuat Konfigurasi di Cisco</div>
+          <div class="skill-bar"><div class="skill-progress" data-width="65%"></div></div>
+        </div>
+        <div class="skill">
+          <div class="skill-name">Membuat WordPress</div>
+          <div class="skill-bar"><div class="skill-progress" data-width="75%"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="certificate">
+      <h1>Certificates</h1>
+      <div class="card">
+        <p><strong>• Network Fundamentals</strong> — Virtual Machine Fundamentals</p>
+        <p><strong>• Python Fundamentals</strong> — Simulasi Jaringan</p>
+        <p><strong>• Linux Fundamentals</strong> — Fortinet</p>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h1>Contact Me</h1>
+      <div class="card">
+        <p>📧 Email: <a href="mailto:vitaaprilia@gmail.com">vitaaprilia@gmail.com</a></p>
+        <p>📱 WhatsApp: <a href="https://wa.me/6289632887020" target="_blank">+62 896-3288-7020</a></p>
+        <p>📸 Instagram: <a href="https://instagram.com/vitaaprillia" target="_blank">@vitaaprillia_</a></p>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // Animasi scroll section
+    const sections = document.querySelectorAll("section");
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+          if (entry.target.id === "skills") {
+            const bars = entry.target.querySelectorAll(".skill-progress");
+            bars.forEach(bar => {
+              const width = bar.getAttribute("data-width");
+              bar.style.width = width;
+            });
+          }
+        }
+      });
+    }, { threshold: 0.3 });
+    sections.forEach(section => observer.observe(section));
+
+    // Efek klik menu aktif + smooth scroll
+    const menuLinks = document.querySelectorAll(".sidebar ul li a");
+    menuLinks.forEach(link => {
+      link.addEventListener("click", function(e) {
+        e.preventDefault();
+        menuLinks.forEach(l => l.classList.remove("active"));
+        this.classList.add("active");
+        const target = document.querySelector(this.getAttribute("href"));
+        window.scrollTo({
+          top: target.offsetTop - 20,
+          behavior: "smooth"
+        });
+      });
+    });
+  </script>
+</body>
+</html>
